@@ -4,6 +4,8 @@ import cc.jktu.api.model.vo.IpInfo;
 import cc.jktu.api.service.IpService;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +22,8 @@ public class IpController {
     private final IpService ipService;
 
     @GetMapping
-    public IpInfo getIpInfo(@RequestParam(value = "ip", required = false) String ip, HttpServletRequest request) throws IOException, GeoIp2Exception {
+    public IpInfo getIpInfo(@RequestParam(value = "ip", required = false) String ip, HttpServletRequest request)
+            throws IOException, GeoIp2Exception {
         return ipService.getIpInfo(ip != null ? ip : ipService.getRealIp(request));
     }
 

@@ -15,7 +15,8 @@ import org.springframework.web.servlet.mvc.method.annotation.AbstractMappingJack
 public class GlobalResponseAdvice extends AbstractMappingJacksonResponseBodyAdvice {
 
     @Override
-    protected void beforeBodyWriteInternal(MappingJacksonValue bodyContainer, MediaType contentType, MethodParameter returnType, ServerHttpRequest request, ServerHttpResponse response) {
+    protected void beforeBodyWriteInternal(MappingJacksonValue bodyContainer, MediaType contentType,
+            MethodParameter returnType, ServerHttpRequest request, ServerHttpResponse response) {
         HttpStatus status = HttpStatus.OK;
         final ResponseStatus responseStatus = returnType.getMethodAnnotation(ResponseStatus.class);
         if (responseStatus != null) {
