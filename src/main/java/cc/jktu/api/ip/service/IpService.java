@@ -9,6 +9,7 @@ import com.maxmind.geoip2.exception.AddressNotFoundException;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.AsnResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,8 @@ public class IpService {
         return ip;
     }
 
-    public IpInfo getIpInfo(String ip) throws IOException, GeoIp2Exception {
+    @SneakyThrows
+    public IpInfo getIpInfo(String ip) {
         final IpInfo ipInfo = new IpInfo();
         try {
             final IPZone ipZone = qqWry.findIP(ip);
