@@ -1,4 +1,4 @@
-package cc.jktu.api.config;
+package cc.jktu.api.ip.config;
 
 import com.github.jarod.qqwry.QQWry;
 import com.maxmind.db.CHMCache;
@@ -10,7 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.IOException;
 
 @Configuration
-public class ApiConfig {
+public class IpConfig {
 
     @Bean
     QQWry qqWry() throws IOException {
@@ -23,4 +23,5 @@ public class ApiConfig {
         final ClassPathResource resource = new ClassPathResource("/ip/asn.mmdb");
         return new DatabaseReader.Builder(resource.getInputStream()).withCache(new CHMCache()).build();
     }
+
 }

@@ -1,4 +1,4 @@
-package cc.jktu.api.model.vo;
+package cc.jktu.api.ip.model.vo;
 
 import lombok.Data;
 

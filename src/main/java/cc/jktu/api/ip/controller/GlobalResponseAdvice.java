@@ -1,6 +1,6 @@
-package cc.jktu.api.controller;
+package cc.jktu.api.ip.controller;
 
-import cc.jktu.api.model.vo.CommonResponse;
+import cc.jktu.api.ip.model.vo.CommonResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ public class GlobalResponseAdvice extends AbstractMappingJacksonResponseBodyAdvi
 
     @Override
     protected void beforeBodyWriteInternal(MappingJacksonValue bodyContainer, MediaType contentType,
-            MethodParameter returnType, ServerHttpRequest request, ServerHttpResponse response) {
+                                           MethodParameter returnType, ServerHttpRequest request, ServerHttpResponse response) {
         HttpStatus status = HttpStatus.OK;
         final ResponseStatus responseStatus = returnType.getMethodAnnotation(ResponseStatus.class);
         if (responseStatus != null) {
@@ -26,6 +26,7 @@ public class GlobalResponseAdvice extends AbstractMappingJacksonResponseBodyAdvi
         Object body = bodyContainer.getValue();
         if (!CommonResponse.class.isAssignableFrom(body.getClass())) {
             final CommonResponse resp = new CommonResponse();
+            resp.setStatus(status.value());
             resp.setMessage(status.name());
             resp.setData(body);
             bodyContainer.setValue(resp);

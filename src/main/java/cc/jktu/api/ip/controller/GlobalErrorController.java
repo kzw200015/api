@@ -1,6 +1,6 @@
-package cc.jktu.api.controller;
+package cc.jktu.api.ip.controller;
 
-import cc.jktu.api.model.vo.CommonResponse;
+import cc.jktu.api.ip.model.vo.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -23,9 +23,10 @@ public class GlobalErrorController implements ErrorController {
     public CommonResponse error(HttpServletRequest request) {
         final Throwable ex = errorAttributes.getError(new ServletWebRequest(request));
         final HttpStatus httpStatus = getHttpStatus(request);
-        final CommonResponse commonResponse = new CommonResponse();
-        commonResponse.setMessage(ex != null ? ex.getLocalizedMessage() : httpStatus.name());
-        return commonResponse;
+        final CommonResponse resp = new CommonResponse();
+        resp.setStatus(httpStatus.value());
+        resp.setMessage(ex != null ? ex.getMessage() : httpStatus.name());
+        return resp;
     }
 
     protected HttpStatus getHttpStatus(HttpServletRequest request) {

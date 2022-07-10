@@ -1,9 +1,11 @@
-package cc.jktu.api.service;
+package cc.jktu.api.ip.service;
 
-import cc.jktu.api.model.vo.IpInfo;
+import cc.jktu.api.ip.exception.IpNotFoundException;
+import cc.jktu.api.ip.model.vo.IpInfo;
 import com.github.jarod.qqwry.IPZone;
 import com.github.jarod.qqwry.QQWry;
 import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.exception.AddressNotFoundException;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.AsnResponse;
 import lombok.RequiredArgsConstructor;
@@ -34,13 +36,18 @@ public class IpService {
     }
 
     public IpInfo getIpInfo(String ip) throws IOException, GeoIp2Exception {
-        final IPZone ipZone = qqWry.findIP(ip);
-        final AsnResponse asn = maxmind.asn(InetAddress.getByName(ip));
         final IpInfo ipInfo = new IpInfo();
-        ipInfo.setIp(ip);
-        ipInfo.setLoc(ipZone.getMainInfo());
-        ipInfo.setOrg(asn.getAutonomousSystemOrganization());
-        ipInfo.setAsn("AS" + asn.getAutonomousSystemNumber());
+        try {
+            final IPZone ipZone = qqWry.findIP(ip);
+            final AsnResponse asn = maxmind.asn(InetAddress.getByName(ip));
+            ipInfo.setIp(ip);
+            ipInfo.setLoc(ipZone.getMainInfo());
+            ipInfo.setOrg(asn.getAutonomousSystemOrganization());
+            ipInfo.setAsn("AS" + asn.getAutonomousSystemNumber());
+        } catch (AddressNotFoundException e) {
+            throw new IpNotFoundException(ip);
+        }
+
         return ipInfo;
     }
 
