@@ -1,6 +1,5 @@
-package cc.jktu.api.ip.controller;
+package cc.jktu.api.common;
 
-import cc.jktu.api.ip.model.vo.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;

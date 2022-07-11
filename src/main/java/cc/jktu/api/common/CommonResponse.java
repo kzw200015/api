@@ -1,4 +1,4 @@
-package cc.jktu.api.ip.model.vo;
+package cc.jktu.api.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

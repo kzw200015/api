@@ -1,6 +1,5 @@
-package cc.jktu.api.ip.controller;
+package cc.jktu.api.common;
 
-import cc.jktu.api.ip.model.vo.CommonResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
