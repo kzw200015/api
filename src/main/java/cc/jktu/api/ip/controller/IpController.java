@@ -1,6 +1,6 @@
 package cc.jktu.api.ip.controller;
 
-import cc.jktu.api.ip.model.vo.IpInfo;
+import cc.jktu.api.ip.model.dto.IpInfo;
 import cc.jktu.api.ip.service.IpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

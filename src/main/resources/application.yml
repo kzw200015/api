@@ -1,1 +1,13 @@
+spring:
+  sql:
+    init:
+      schema-locations: classpath:/blog/schema.sql
+      mode: always
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
+mybatis-plus:
+  global-config:
+    banner: false
