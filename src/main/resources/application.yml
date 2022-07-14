@@ -1,4 +1,7 @@
 spring:
+  redis:
+    host: jktu.cc
+    port: 6379
   sql:
     init:
       schema-locations: classpath:/blog/schema.sql
