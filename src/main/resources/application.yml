@@ -1,7 +1,4 @@
 spring:
-  redis:
-    host: jktu.cc
-    port: 6379
   sql:
     init:
       schema-locations: classpath:/blog/schema.sql
@@ -10,7 +7,17 @@ spring:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
 
 mybatis-plus:
   global-config:
     banner: false
+
+sa-token:
+  token-name: Token
+  is-print: false
+  is-read-cookie: false

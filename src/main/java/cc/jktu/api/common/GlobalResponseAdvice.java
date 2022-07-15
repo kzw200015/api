@@ -21,12 +21,12 @@ public class GlobalResponseAdvice extends AbstractMappingJacksonResponseBodyAdvi
         final String message = getMessage(status, returnType);
 
         Object body = bodyContainer.getValue();
-        if (body instanceof CommonResponse) {
-            if (((CommonResponse) body).getStatus() == null) {
-                ((CommonResponse) body).setStatus(status.value());
+        if (body instanceof CommonResponse _body) {
+            if (_body.getStatus() == null) {
+                _body.setStatus(status.value());
             }
-            if (((CommonResponse) body).getMessage() == null) {
-                ((CommonResponse) body).setMessage(message);
+            if (_body.getMessage() == null) {
+                _body.setMessage(message);
             }
         } else {
             final CommonResponse resp = new CommonResponse();

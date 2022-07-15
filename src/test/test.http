@@ -3,11 +3,26 @@ GET http://localhost:8080/api/ip?ip=1.1.1.1
 ###
 GET http://localhost:8080/api/ip
 
-###
+### 注册
 POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "kzw200015",
-  "password": "15261841015kzw"
+  "username": "admin",
+  "password": "passwd123"
 }
+
+### 登录
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "passwd123"
+}
+
+### 我
+GET http://localhost:8080/api/users/me
+Token: 899bec52-6e0a-4b3c-8d8f-37a3b21b0691
+
+###
