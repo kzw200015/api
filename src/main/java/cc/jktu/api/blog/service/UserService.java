@@ -17,11 +17,25 @@ public class UserService {
     private final UserMapper userMapper;
     private final PostMapper postMapper;
 
+    /**
+     * 添加用户
+     * id会被置为null
+     * password会被哈希处理后存入
+     *
+     * @param user User对象
+     */
     public void addUser(User user) {
+        user.setId(null);
         user.setPassword(BcryptUtil.hashPassword(user.getPassword()));
         userMapper.insert(user);
     }
 
+    /**
+     * 根据id查询用户
+     *
+     * @param id 用户id
+     * @return 用户
+     */
     public User getUserById(Integer id) {
         final User user = userMapper.selectById(id);
         if (user == null) {
@@ -30,6 +44,12 @@ public class UserService {
         return user;
     }
 
+    /**
+     * 根据id更新用户
+     * password会被哈希处理后存入
+     *
+     * @param user 用户对象，id不可为空
+     */
     public void updateUserById(User user) {
         if (user.getPassword() != null) {
             user.setPassword(BcryptUtil.hashPassword(user.getPassword()));
@@ -47,6 +67,12 @@ public class UserService {
         userMapper.deleteById(id);
     }
 
+    /**
+     * 根据用户名查询用户
+     *
+     * @param username 用户名
+     * @return 用户
+     */
     public User getUserByUsername(String username) {
         final User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUsername, username));
         if (user == null) {
