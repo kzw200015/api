@@ -1,4 +1,4 @@
-package cc.jktu.api.blog;
+package cc.jktu.api.util;
 
 import org.mindrot.jbcrypt.BCrypt;
 
