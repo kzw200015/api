@@ -22,7 +22,7 @@ public class UserService {
      * id会被置为null
      * password会被哈希处理后存入
      *
-     * @param user User对象
+     * @param user 用户对象
      */
     public void addUser(User user) {
         user.setId(null);
