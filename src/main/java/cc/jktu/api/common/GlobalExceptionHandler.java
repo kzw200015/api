@@ -1,6 +1,7 @@
 package cc.jktu.api.common;
 
 import cc.jktu.api.blog.exception.NotFoundException;
+import cc.jktu.api.blog.exception.WrongPasswordException;
 import cn.dev33.satoken.exception.NotLoginException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,6 +17,13 @@ public class GlobalExceptionHandler {
     public CommonResponse handleNotLoginException(NotLoginException ex) {
         return CommonResponse.noContent(HttpStatus.UNAUTHORIZED, "未登录");
     }
+
+    @ExceptionHandler(WrongPasswordException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public CommonResponse handleWrongPasswordException(WrongPasswordException ex) {
+        return CommonResponse.noContent(HttpStatus.BAD_REQUEST, "密码错误");
+    }
+
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
