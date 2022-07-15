@@ -7,6 +7,7 @@ import cc.jktu.api.blog.dto.UserRegisterOrLoginRequest;
 import cc.jktu.api.blog.exception.WrongPasswordException;
 import cc.jktu.api.blog.service.UserService;
 import cc.jktu.api.common.CommonResponse;
+import cc.jktu.api.util.BcryptUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class AuthController {
     @ResponseMessage("登录成功")
     public UserLoginResponse login(@RequestBody UserRegisterOrLoginRequest request) {
         final User user = userService.getUserByUsername(request.getUsername());
-        if (!userService.checkPassword(request.getPassword(), user.getPassword())) {
+        if (!BcryptUtil.checkPassword(request.getPassword(), user.getPassword())) {
             throw new WrongPasswordException();
         }
         StpUtil.login(user.getId());
