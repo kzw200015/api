@@ -32,5 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 
-
+http-client.private.env.json
 src/test/java/cc/jktu/api/ApiApplicationDataImportTests.java
