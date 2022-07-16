@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS posts
     content     TEXT         NULL,
     create_time BIGINT       NOT NULL,
     update_time BIGINT       NOT NULL,
-    user_id     INT REFERENCES users (id)
+    user_id     INT NOT NULL REFERENCES users (id)
 );

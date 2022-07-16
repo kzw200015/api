@@ -4,6 +4,8 @@ import cc.jktu.api.blog.dao.entity.Post;
 import cc.jktu.api.blog.dao.mapper.PostMapper;
 import cc.jktu.api.blog.dto.PageResponse;
 import cc.jktu.api.blog.exception.PostNotFoundException;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,7 +38,8 @@ public class PostService {
      * @return 分页结果
      */
     public PageResponse<Post> getPosts(Integer page, Integer size) {
-        final Page<Post> postPage = postMapper.selectPage(new Page<>(page.longValue(), size.longValue()), null);
+        final LambdaQueryWrapper<Post> queryWrapper = new QueryWrapper<Post>().lambda().orderByDesc(Post::getId);
+        final Page<Post> postPage = postMapper.selectPage(new Page<>(page.longValue(), size.longValue()), queryWrapper);
         final PageResponse<Post> pageResponse = new PageResponse<>();
         pageResponse.setTotal(postPage.getTotal());
         pageResponse.setPages(postPage.getPages());
