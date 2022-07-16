@@ -26,7 +26,7 @@ GET http://localhost:8080/api/users/me
 Token: 42868646-254e-4e4a-945f-05aa4fd4bb0f
 
 ### 获取单个文章
-GET http://localhost:8080/api/posts/1
+GET http://localhost:8080/api/posts/100
 
 ### 获取多个文章
 GET http://localhost:8080/api/posts?page=1&size=10
