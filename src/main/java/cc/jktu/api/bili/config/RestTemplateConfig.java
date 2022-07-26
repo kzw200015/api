@@ -41,7 +41,7 @@ public class RestTemplateConfig {
         if (proxyUri != null) {
             SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
             final URI u = new URI(proxyUri);
-            final Proxy proxy = new Proxy(Proxy.Type.valueOf(u.getScheme()), new InetSocketAddress(u.getHost(), u.getPort()));
+            final Proxy proxy = new Proxy(Proxy.Type.valueOf(u.getScheme().toUpperCase()), new InetSocketAddress(u.getHost(), u.getPort()));
             requestFactory.setProxy(proxy);
             return new RestTemplate(requestFactory);
         } else {
