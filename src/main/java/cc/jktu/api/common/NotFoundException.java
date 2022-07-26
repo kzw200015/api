@@ -1,4 +1,4 @@
-package cc.jktu.api.blog.exception;
+package cc.jktu.api.common;
 
 public class NotFoundException extends RuntimeException {
 

@@ -7,7 +7,7 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     hikari:
-      idle-timeout: 300000
+      max-lifetime: 300000
   mvc:
     throw-exception-if-no-handler-found: true
   web:
@@ -22,3 +22,8 @@ sa-token:
   token-name: Token
   is-print: false
   is-read-cookie: false
+
+bili:
+  proxies:
+    hk: ${HK_PROXY}
+    tw: ${TW_PROXY}
