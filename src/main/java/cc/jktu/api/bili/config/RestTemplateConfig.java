@@ -32,7 +32,7 @@ public class RestTemplateConfig {
     private RestTemplate createRestTemplate(String proxyUri) {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         final URI u = new URI(proxyUri);
-        final Proxy proxy = new Proxy(Proxy.Type.valueOf(u.getScheme().substring(0, 4).toUpperCase()), new InetSocketAddress(u.getHost(), u.getPort()));
+        final Proxy proxy = new Proxy(Proxy.Type.valueOf(u.getScheme().toUpperCase()), new InetSocketAddress(u.getHost(), u.getPort()));
         requestFactory.setProxy(proxy);
         return new RestTemplate(requestFactory);
     }
