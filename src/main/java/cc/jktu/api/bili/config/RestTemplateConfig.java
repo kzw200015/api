@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Configuration
 @Data
-@ConfigurationProperties("bili")
+@ConfigurationProperties("api.bili")
 public class RestTemplateConfig {
 
     private final Map<String, String> proxies;
