@@ -2,7 +2,6 @@ package cc.jktu.api.bili.service;
 
 import cc.jktu.api.bili.config.RestTemplateContainer;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -14,7 +13,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequiredArgsConstructor
 public class BangumiService {
 
-    @Qualifier("restTemplateMap")
     private final RestTemplateContainer restTemplateContainer;
 
     public ResponseEntity<String> parse(String apiPath, @RequestParam MultiValueMap<String, String> params) {

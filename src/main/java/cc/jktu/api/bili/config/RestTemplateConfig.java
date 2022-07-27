@@ -21,8 +21,8 @@ public class RestTemplateConfig {
 
     private final Map<String, String> proxies;
 
-    @Bean("restTemplateMap")
-    RestTemplateContainer restTemplateMap() {
+    @Bean
+    RestTemplateContainer restTemplateContainer() {
         final Map<String, RestTemplate> restTemplateMap = new HashMap<>();
         proxies.forEach((area, proxyUri) -> restTemplateMap.put(area, createRestTemplate(proxyUri)));
         return new RestTemplateContainer(restTemplateMap);
