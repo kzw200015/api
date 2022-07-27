@@ -34,10 +34,12 @@ public class RestTemplateConfig {
         final URI uri = URI.create(proxyUri);
         Proxy proxy = Proxy.NO_PROXY;
         final String scheme = uri.getScheme();
+        final String host = uri.getHost();
+        final int port = uri.getPort();
         if (scheme.equals("socks5")) {
-            proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(uri.getHost(), uri.getPort()));
+            proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(host, port));
         } else if (scheme.equals("http")) {
-            proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(uri.getHost(), uri.getPort()));
+            proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(host, port));
         }
         requestFactory.setProxy(proxy);
         return new RestTemplate(requestFactory);
