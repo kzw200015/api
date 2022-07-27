@@ -1,6 +1,7 @@
 package cc.jktu.api.common.advice;
 
 import cc.jktu.api.common.annotation.ResponseMessage;
+import cc.jktu.api.common.dto.CommonResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractMappingJacksonResponseBodyAdvice;
 
 @RestControllerAdvice
-public class GlobalResponseAdvice extends AbstractMappingJacksonResponseBodyAdvice {
+public class CommonResponseAdvice extends AbstractMappingJacksonResponseBodyAdvice {
 
     @Override
     protected void beforeBodyWriteInternal(@NotNull MappingJacksonValue bodyContainer, @NotNull MediaType contentType, @NotNull MethodParameter returnType, @NotNull ServerHttpRequest request, @NotNull ServerHttpResponse response) {

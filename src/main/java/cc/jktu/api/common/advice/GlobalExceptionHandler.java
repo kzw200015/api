@@ -1,5 +1,6 @@
 package cc.jktu.api.common.advice;
 
+import cc.jktu.api.common.dto.CommonResponse;
 import cc.jktu.api.common.exception.NotFoundException;
 import cc.jktu.api.common.exception.WrongPasswordException;
 import cn.dev33.satoken.exception.NotLoginException;

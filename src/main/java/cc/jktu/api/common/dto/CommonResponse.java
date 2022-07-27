@@ -1,4 +1,4 @@
-package cc.jktu.api.common.advice;
+package cc.jktu.api.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

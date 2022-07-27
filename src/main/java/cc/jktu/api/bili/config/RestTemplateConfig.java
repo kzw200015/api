@@ -22,20 +22,21 @@ public class RestTemplateConfig {
     private final Map<String, String> proxies;
 
     @Bean("restTemplateMap")
-    Map<String, RestTemplate> restTemplateMap() {
+    RestTemplateContainer restTemplateMap() {
         final Map<String, RestTemplate> restTemplateMap = new HashMap<>();
         proxies.forEach((area, proxyUri) -> restTemplateMap.put(area, createRestTemplate(proxyUri)));
-        return Map.copyOf(restTemplateMap);
+        return new RestTemplateContainer(restTemplateMap);
     }
 
     @SneakyThrows
     private RestTemplate createRestTemplate(String proxyUri) {
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        final SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         final URI uri = URI.create(proxyUri);
         Proxy proxy = Proxy.NO_PROXY;
-        if (uri.getScheme().equals("socks5")) {
+        final String scheme = uri.getScheme();
+        if (scheme.equals("socks5")) {
             proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(uri.getHost(), uri.getPort()));
-        } else if (uri.getScheme().equals("http")) {
+        } else if (scheme.equals("http")) {
             proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(uri.getHost(), uri.getPort()));
         }
         requestFactory.setProxy(proxy);
