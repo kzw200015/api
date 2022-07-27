@@ -1,4 +1,4 @@
-package cc.jktu.api.common;
+package cc.jktu.api.common.config;
 
 import cn.dev33.satoken.interceptor.SaAnnotationInterceptor;
 import org.springframework.context.annotation.Configuration;

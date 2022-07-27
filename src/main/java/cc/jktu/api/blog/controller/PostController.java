@@ -4,7 +4,7 @@ import cc.jktu.api.blog.dao.entity.Post;
 import cc.jktu.api.blog.dto.PageResponse;
 import cc.jktu.api.blog.dto.PostAddOrUpdateRequest;
 import cc.jktu.api.blog.service.PostService;
-import cc.jktu.api.common.CommonResponse;
+import cc.jktu.api.common.advice.CommonResponse;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

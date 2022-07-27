@@ -9,33 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class BangumiService {
 
-    @Qualifier("hkRestTemplate")
-    private final RestTemplate hkRestTemplate;
-    @Qualifier("twRestTemplate")
-    private final RestTemplate twRestTemplate;
-
-    @Qualifier("noProxyRestTemplate")
-    private final RestTemplate noProxyRestTemplate;
+    @Qualifier("restTemplateMap")
+    private final Map<String, RestTemplate> restTemplateMap;
 
     public ResponseEntity<String> parse(String apiPath, @RequestParam MultiValueMap<String, String> params) {
         String baseUrl = "https://api.bilibili.com";
         final String url = UriComponentsBuilder.fromHttpUrl(baseUrl + apiPath).queryParams(params).build().encode().toUriString();
-
-        RestTemplate restTemplate;
-        final String area = params.get("area").stream().findFirst().orElse("");
-
-        if (area.equals("hk")) {
-            restTemplate = hkRestTemplate;
-        } else if (area.equals("tw")) {
-            restTemplate = twRestTemplate;
-        } else {
-            restTemplate = noProxyRestTemplate;
-        }
-
+        final String area = params.get("area").stream().findFirst().orElseThrow();
+        final RestTemplate restTemplate = restTemplateMap.getOrDefault(area, new RestTemplate());
         return restTemplate.getForEntity(url, String.class);
     }
 

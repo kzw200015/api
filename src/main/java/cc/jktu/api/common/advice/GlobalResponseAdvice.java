@@ -1,6 +1,6 @@
-package cc.jktu.api.common;
+package cc.jktu.api.common.advice;
 
-import cc.jktu.api.blog.annotation.ResponseMessage;
+import cc.jktu.api.common.annotation.ResponseMessage;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;

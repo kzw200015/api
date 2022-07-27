@@ -1,13 +1,13 @@
 package cc.jktu.api.blog.controller;
 
-import cc.jktu.api.blog.annotation.ResponseMessage;
 import cc.jktu.api.blog.dao.entity.User;
 import cc.jktu.api.blog.dto.UserLoginResponse;
 import cc.jktu.api.blog.dto.UserRegisterOrLoginRequest;
-import cc.jktu.api.blog.exception.WrongPasswordException;
 import cc.jktu.api.blog.service.UserService;
-import cc.jktu.api.common.CommonResponse;
-import cc.jktu.api.util.BcryptUtil;
+import cc.jktu.api.common.advice.CommonResponse;
+import cc.jktu.api.common.annotation.ResponseMessage;
+import cc.jktu.api.common.exception.WrongPasswordException;
+import cc.jktu.api.common.util.BcryptUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -5,7 +5,7 @@ import cc.jktu.api.blog.dao.entity.User;
 import cc.jktu.api.blog.dao.mapper.PostMapper;
 import cc.jktu.api.blog.dao.mapper.UserMapper;
 import cc.jktu.api.blog.exception.UserNotFoundException;
-import cc.jktu.api.util.BcryptUtil;
+import cc.jktu.api.common.util.BcryptUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

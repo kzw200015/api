@@ -1,6 +1,7 @@
-package cc.jktu.api.common;
+package cc.jktu.api.common.advice;
 
-import cc.jktu.api.blog.exception.WrongPasswordException;
+import cc.jktu.api.common.exception.NotFoundException;
+import cc.jktu.api.common.exception.WrongPasswordException;
 import cn.dev33.satoken.exception.NotLoginException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

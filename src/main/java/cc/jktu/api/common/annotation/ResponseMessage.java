@@ -1,4 +1,4 @@
-package cc.jktu.api.blog.annotation;
+package cc.jktu.api.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
