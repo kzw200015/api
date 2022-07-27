@@ -31,8 +31,14 @@ public class RestTemplateConfig {
     @SneakyThrows
     private RestTemplate createRestTemplate(String proxyUri) {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        final URI u = new URI(proxyUri);
-        final Proxy proxy = new Proxy(Proxy.Type.valueOf(u.getScheme().toUpperCase()), new InetSocketAddress(u.getHost(), u.getPort()));
+        final URI uri = URI.create(proxyUri);
+        Proxy.Type proxyType = Proxy.Type.DIRECT;
+        if (uri.getScheme().equals("socks5")) {
+            proxyType = Proxy.Type.SOCKS;
+        } else if (uri.getScheme().equals("http")) {
+            proxyType = Proxy.Type.HTTP;
+        }
+        final Proxy proxy = new Proxy(proxyType, new InetSocketAddress(uri.getHost(), uri.getPort()));
         requestFactory.setProxy(proxy);
         return new RestTemplate(requestFactory);
     }
