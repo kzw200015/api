@@ -18,12 +18,12 @@ public class BangumiController {
 
     @GetMapping(bangumiParsePathForWeb)
     public ResponseEntity<String> parseWeb(@RequestParam MultiValueMap<String, String> params) {
-        return bangumiService.parse(bangumiParsePathForWeb, params);
+        return bangumiService.request(bangumiParsePathForWeb, params);
     }
 
     @GetMapping(bangumiParsePathForApi)
     public ResponseEntity<String> parseApi(@RequestParam MultiValueMap<String, String> params) {
-        return bangumiService.parse(bangumiParsePathForApi, params);
+        return bangumiService.request(bangumiParsePathForApi, params);
     }
 
 }
