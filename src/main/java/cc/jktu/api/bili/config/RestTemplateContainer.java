@@ -10,7 +10,7 @@ public class RestTemplateContainer {
 
     private final Map<String, RestTemplate> restTemplateMap;
 
-    public RestTemplate get(String area) {
+    public RestTemplate getByArea(String area) {
         return restTemplateMap.getOrDefault(area, new RestTemplate());
     }
 

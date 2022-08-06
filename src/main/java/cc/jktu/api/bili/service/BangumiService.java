@@ -18,7 +18,7 @@ public class BangumiService {
         String baseUrl = "https://api.bilibili.com";
         final String area = params.get("area").stream().findFirst().orElseThrow();
         final UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(baseUrl + apiPath).queryParams(params);
-        final RestTemplate restTemplate = restTemplateContainer.get(area);
+        final RestTemplate restTemplate = restTemplateContainer.getByArea(area);
         return restTemplate.getForEntity(uriBuilder.toUriString(), String.class);
     }
 
