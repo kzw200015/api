@@ -10,7 +10,7 @@ public class SaTokenConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SaAnnotationInterceptor()).addPathPatterns("/api/**");
+        registry.addInterceptor(new SaAnnotationInterceptor()).addPathPatterns("/cc/jktu/api/**");
     }
 
 }

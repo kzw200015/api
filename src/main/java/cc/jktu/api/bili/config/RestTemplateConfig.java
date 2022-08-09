@@ -35,7 +35,7 @@ public class RestTemplateConfig {
         final String scheme = uri.getScheme();
         final String host = uri.getHost();
         final int port = uri.getPort();
-        
+
         Proxy proxy = Proxy.NO_PROXY;
         if (scheme.equals("socks5")) {
             proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(host, port));
