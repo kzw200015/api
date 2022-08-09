@@ -1,4 +1,4 @@
-FROM maven:3-eclipse-temurin-17-alpine as builder
+FROM gradle:jdk17-alpine AS builder
 
 COPY . /build
 
