@@ -23,9 +23,3 @@ sa-token:
   token-name: Token
   is-print: false
   is-read-cookie: false
-
-api:
-  bili:
-    proxies:
-      hk: ${HK_PROXY}
-      tw: ${TW_PROXY}
