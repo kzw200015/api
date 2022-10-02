@@ -3,16 +3,14 @@ package cc.jktu.api.ip.controller;
 import cc.jktu.api.ip.model.dto.IpInfo;
 import cc.jktu.api.ip.service.IpService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/ip")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class IpController {
 
     private final IpService ipService;
