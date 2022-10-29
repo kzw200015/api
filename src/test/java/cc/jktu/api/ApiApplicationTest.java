@@ -16,13 +16,15 @@ public class ApiApplicationTest {
     @Test
     void updateIpDatabase() throws IOException {
         final RestTemplate restTemplate = new RestTemplate();
-        final byte[] qqWryData = restTemplate.getForObject("https://raw.fastgit.org/out0fmemory/qqwry.dat/master/qqwry_lastest.dat", byte[].class);
-        assert qqWryData != null;
+        final byte[] qqWryData = restTemplate
+                .getForObject("https://raw.fastgit.org/out0fmemory/qqwry.dat/master/qqwry_lastest.dat", byte[].class);
         Files.write(Paths.get("src/main/resources/ip/qqwry.dat"), qqWryData);
 
-        final Resource asnData = restTemplate.getForObject("https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=GnT0RmCSbcoQXiMg&suffix=tar.gz", Resource.class);
-        assert asnData != null;
-        try (final TarArchiveInputStream stream = new TarArchiveInputStream(new GzipCompressorInputStream(asnData.getInputStream()))) {
+        final Resource asnData = restTemplate.getForObject(
+                "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=GnT0RmCSbcoQXiMg&suffix=tar.gz",
+                Resource.class);
+        try (final TarArchiveInputStream stream = new TarArchiveInputStream(
+                new GzipCompressorInputStream(asnData.getInputStream()))) {
             ArchiveEntry entry;
             while ((entry = stream.getNextEntry()) != null) {
                 if (Paths.get(entry.getName()).getFileName().toString().equals("GeoLite2-ASN.mmdb")) {
