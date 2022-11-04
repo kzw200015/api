@@ -34,4 +34,4 @@ build/
 
 ### Project ###
 http-client.private.env.json
-src/test/java/cc/jktu/api/ApiApplicationDataImportTests.java
+backend/src/test/java/cc/jktu/api/ApiApplicationDataImportTests.java
