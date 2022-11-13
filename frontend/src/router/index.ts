@@ -1,29 +1,45 @@
-import { createRouter, createWebHistory } from "vue-router"
-import Ip from "../views/ip/IpView.vue"
-import SubParser from "../views/subParser/SubParserView.vue"
+import { createRouter, createWebHashHistory } from "vue-router"
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes: [
         {
-            path: "/",
-            redirect: "/ip"
+            path: "/login",
+            component: () => import("../views/UserLogin.vue"),
+            props: true
         },
         {
-            path: "/ip",
-            component: Ip,
-            meta: { title: "IP查询" }
-        }, {
-            path: "/subParser",
-            component: SubParser,
-            meta: { title: "订阅解析" }
+            path: "/register",
+            component: () => import("../views/UserRegister.vue")
+        },
+        {
+            path: "/admin",
+            component: () => import("../views/admin/AdminBase.vue"),
+            redirect: "/admin/posts",
+            beforeEnter: (to) => {
+                if (localStorage.getItem("token")) {
+                    document.title = `${to.meta.title} - 后台管理`
+                    return true
+                } else {
+                    return { path: "/login", query: { redirectUrl: to.fullPath } }
+                }
+            },
+            children: [
+                {
+                    path: "posts",
+                    component: () => import("../views/admin/PostList.vue"),
+                    meta: { title: "文章列表" }
+                },
+                {
+                    path: "posts/:id/edit",
+                    component: () => import("../views/admin/PostEdit.vue"),
+                    meta: { title: "文章编辑" },
+                    props: true
+                }
+            ]
         }
     ]
 })
 
-router.beforeEach((to) => {
-    document.title = `${to.meta.title} - 工具箱`
-    return true
-})
 
 export { router }

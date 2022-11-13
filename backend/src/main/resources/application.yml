@@ -3,6 +3,7 @@ spring:
     init:
       schema-locations: classpath:/blog/schema.sql
       mode: always
+      data-locations: classpath:/blog/data.sql
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}

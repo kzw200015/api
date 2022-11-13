@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -25,6 +27,10 @@ public class UserService {
      * @param user 用户对象
      */
     public void addUser(User user) {
+        if (userMapper.selectCount(null) > 1) {
+            return;
+        }
+
         user.setId(null);
         user.setPassword(BcryptUtil.hashPassword(user.getPassword()));
         userMapper.insert(user);
@@ -79,6 +85,10 @@ public class UserService {
             throw new UserNotFoundException(username);
         }
         return user;
+    }
+
+    public List<User> getUsers() {
+        return userMapper.selectList(null);
     }
 
 }

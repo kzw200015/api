@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS posts
     id          INT PRIMARY KEY AUTO_INCREMENT,
     title       VARCHAR(100) NULL,
     content     TEXT         NULL,
-    create_time BIGINT       NOT NULL,
-    update_time BIGINT       NOT NULL,
+    create_time BIGINT(10)       NOT NULL,
+    update_time BIGINT(10)       NOT NULL,
     user_id     INT          NOT NULL REFERENCES users (id)
 );
