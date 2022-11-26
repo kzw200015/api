@@ -21,6 +21,15 @@ Content-Type: application/json
   "password": {{password}}
 }
 
+### 登录2
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": {{username}},
+  "password": {{password}}
+}
+
 ### 我
 GET http://localhost:8080/api/users/me
 Token: 42868646-254e-4e4a-945f-05aa4fd4bb0f

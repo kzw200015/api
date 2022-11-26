@@ -19,8 +19,3 @@ spring:
 mybatis-plus:
   global-config:
     banner: false
-
-sa-token:
-  token-name: Token
-  is-print: false
-  is-read-cookie: false

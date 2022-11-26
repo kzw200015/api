@@ -1,6 +1,6 @@
 package cc.jktu.api;
 
-import cc.jktu.api.common.util.BcryptUtil;
+import cc.jktu.api.util.BcryptUtil;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
