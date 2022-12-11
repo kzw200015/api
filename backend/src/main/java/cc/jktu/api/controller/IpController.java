@@ -2,10 +2,11 @@ package cc.jktu.api.controller;
 
 import cc.jktu.api.dto.IpInfo;
 import cc.jktu.api.service.IpService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 @RestController
 @RequestMapping("/api/ip")

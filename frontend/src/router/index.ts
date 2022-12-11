@@ -16,14 +16,6 @@ const router = createRouter({
             path: "/admin",
             component: () => import("../views/admin/AdminBase.vue"),
             redirect: "/admin/posts",
-            beforeEnter: (to) => {
-                if (localStorage.getItem("token")) {
-                    document.title = `${to.meta.title} - 后台管理`
-                    return true
-                } else {
-                    return { path: "/login", query: { redirectUrl: to.fullPath } }
-                }
-            },
             children: [
                 {
                     path: "posts",

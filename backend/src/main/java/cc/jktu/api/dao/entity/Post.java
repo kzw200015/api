@@ -1,16 +1,11 @@
 package cc.jktu.api.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Data
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-@TableName("posts")
-public class Post extends BaseEntity {
+public class Post {
 
+    private Integer id;
     private String title;
     private String content;
     private Long createTime;

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.jktu.api.dao.mapper.UserMapper">
+    <insert useGeneratedKeys="true" keyProperty="id" id="insert">
+        INSERT INTO user(username, password)
+        VALUES (#{user.username}, #{user.password})
+    </insert>
+    <update id="updateById">
+        UPDATE user u
+        <set>
+            <if test="user.username != null">
+                u.username = #{user.username},
+            </if>
+            <if test="user.password != null">
+                u.password = #{user.password},
+            </if>
+        </set>
+        WHERE u.id = #{user.id}
+    </update>
+    <delete id="deleteById">
+        DELETE
+        FROM user u
+        WHERE u.id = #{id}
+    </delete>
+
+    <select id="selectById" resultType="cc.jktu.api.dao.entity.User">
+        SELECT *
+        FROM user u
+        WHERE u.id = #{id}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM user
+    </select>
+    <select id="selectByUsername" resultType="cc.jktu.api.dao.entity.User">
+        SELECT *
+        FROM user u
+        WHERE u.username = #{username}
+    </select>
+    <select id="selectList" resultType="cc.jktu.api.dao.entity.User">
+        SELECT *
+        FROM user u
+    </select>
+</mapper>

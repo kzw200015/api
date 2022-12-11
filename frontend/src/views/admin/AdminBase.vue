@@ -1,12 +1,6 @@
 <template>
-  <el-container>
-    <el-header>
-      <head-nav-bar></head-nav-bar>
-    </el-header>
-    <el-main>
-      <router-view></router-view>
-    </el-main>
-  </el-container>
+    <head-nav-bar></head-nav-bar>
+    <router-view></router-view>
 </template>
 
 <script setup lang="ts">

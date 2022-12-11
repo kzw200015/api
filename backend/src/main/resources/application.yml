@@ -8,14 +8,15 @@ spring:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    hikari:
-      max-lifetime: 300000
   mvc:
     throw-exception-if-no-handler-found: true
   web:
     resources:
       add-mappings: false
 
-mybatis-plus:
-  global-config:
-    banner: false
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+
+logging:
+  level:
+    cc.jktu.api.dao.mapper: debug

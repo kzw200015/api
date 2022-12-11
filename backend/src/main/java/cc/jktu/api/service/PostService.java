@@ -2,13 +2,13 @@ package cc.jktu.api.service;
 
 import cc.jktu.api.dao.entity.Post;
 import cc.jktu.api.dao.mapper.PostMapper;
-import cc.jktu.api.dto.PageResponse;
+import cc.jktu.api.dto.Page;
 import cc.jktu.api.exception.PostNotFoundException;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,20 +33,20 @@ public class PostService {
     /**
      * 根据所给页码和分页大小返回多篇文章
      *
-     * @param page 页码
-     * @param size 分页大小
+     * @param pageSize 页码
+     * @param pageNum  分页大小
      * @return 分页结果
      */
-    public PageResponse<Post> getPosts(Integer page, Integer size) {
-        final LambdaQueryWrapper<Post> queryWrapper = new QueryWrapper<Post>().lambda().orderByDesc(Post::getId);
-        final Page<Post> postPage = postMapper.selectPage(new Page<>(page.longValue(), size.longValue()), queryWrapper);
-        final PageResponse<Post> pageResponse = new PageResponse<>();
-        pageResponse.setTotal(postPage.getTotal());
-        pageResponse.setPages(postPage.getPages());
-        pageResponse.setSize(postPage.getSize());
-        pageResponse.setCurrent(postPage.getCurrent());
-        pageResponse.setValues(postPage.getRecords());
-        return pageResponse;
+    public Page<Post> getPosts(Integer pageNum, Integer pageSize) {
+        final List<Post> posts = postMapper.selectPage(pageNum, pageSize);
+        final Integer total = postMapper.count();
+        final Page<Post> page = new Page<>();
+        page.setTotal(total);
+        page.setPages(total / pageSize + 1);
+        page.setPageNum(pageNum);
+        page.setPageSize(pageSize);
+        page.setValues(posts);
+        return page;
     }
 
     /**
@@ -57,6 +57,8 @@ public class PostService {
      */
     public void addPost(Post post) {
         post.setId(null);
+        post.setCreateTime(Instant.now().getEpochSecond());
+        post.setUpdateTime(Instant.now().getEpochSecond());
         postMapper.insert(post);
     }
 

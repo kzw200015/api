@@ -1,17 +1,17 @@
 package cc.jktu.api.service;
 
-import cc.jktu.api.exception.IpNotFoundException;
 import cc.jktu.api.dto.IpInfo;
+import cc.jktu.api.exception.IpNotFoundException;
 import com.github.jarod.qqwry.IPZone;
 import com.github.jarod.qqwry.QQWry;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.AddressNotFoundException;
 import com.maxmind.geoip2.model.AsnResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 
 @Service

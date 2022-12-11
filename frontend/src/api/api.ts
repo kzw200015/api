@@ -1,19 +1,10 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
+import axios, { AxiosError, AxiosResponse } from "axios"
 import { Page, Post, Resp, User, UserLoginResponse, UserRegisterOrLoginRequest } from "./types"
-import { ElMessage } from "element-plus"
 import { router } from "../router"
+import { ElMessage } from "element-plus"
 
 const client = axios.create({
     baseURL: "/api"
-})
-
-client.interceptors.request.use((config: AxiosRequestConfig) => {
-    if (config.headers) {
-        config.headers.Token = localStorage.getItem("token")
-    } else {
-        config.headers = { Token: localStorage.getItem("token") }
-    }
-    return config
 })
 
 client.interceptors.response.use((response: AxiosResponse) => response, async (error: AxiosError) => {
@@ -24,25 +15,30 @@ client.interceptors.response.use((response: AxiosResponse) => response, async (e
         ElMessage.warning("无权进行此操作")
     }
 
-    return error
+    throw error
 })
 export { client }
 
-export const getMe = async () => {
+export const getMe = async (): Promise<User> => {
     const resp = await client.get<Resp<User>>("/users/me")
 
     return resp.data.data
 }
 
-export const getUserById = async (id: number) => {
+export const getUserById = async (id: number): Promise<User> => {
     const resp = await client.get<Resp<User>>(`/users/${id}`)
 
     return resp.data.data
 }
 
+export const getUsers = async (): Promise<User[]> => {
+    const resp = await client.get<Resp<User[]>>("/users")
+
+    return resp.data.data
+}
+
 export const login = async (body: UserRegisterOrLoginRequest) => {
-    const resp = await client.post<Resp<UserLoginResponse>>("/auth/login", body)
-    localStorage.setItem("token", resp.data.data.token)
+    await client.post<Resp<UserLoginResponse>>("/auth/login", body)
 }
 
 export const register = async (body: UserRegisterOrLoginRequest) => {
@@ -53,13 +49,19 @@ export const logout = async () => {
     await client.post("/auth/logout")
 }
 
-export const getPosts = async (page: number, size: number) => {
+export const getPosts = async (page: number, size: number): Promise<Page<Post>> => {
     const resp = await client.get<Resp<Page<Post>>>("/posts", {
         params: {
             page: page,
             size: size
         }
     })
+
+    return resp.data.data
+}
+
+export const getPostById = async (id: number): Promise<Post> => {
+    const resp = await client.get<Resp<Post>>(`/posts/${id}`)
 
     return resp.data.data
 }

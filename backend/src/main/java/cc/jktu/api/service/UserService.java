@@ -1,12 +1,10 @@
 package cc.jktu.api.service;
 
-import cc.jktu.api.dao.entity.Post;
 import cc.jktu.api.dao.entity.User;
 import cc.jktu.api.dao.mapper.PostMapper;
 import cc.jktu.api.dao.mapper.UserMapper;
 import cc.jktu.api.exception.UserNotFoundException;
 import cc.jktu.api.util.BcryptUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +25,7 @@ public class UserService {
      * @param user 用户对象
      */
     public void addUser(User user) {
-        if (userMapper.selectCount(null) > 1) {
+        if (userMapper.count() > 1) {
             return;
         }
 
@@ -66,11 +64,11 @@ public class UserService {
     /**
      * 根据id删除用户，一并删除用户所有的文章
      *
-     * @param id 用户id
+     * @param userId 用户id
      */
-    public void removeUserById(Integer id) {
-        postMapper.delete(new QueryWrapper<Post>().lambda().eq(Post::getUserId, id));
-        userMapper.deleteById(id);
+    public void removeUserById(Integer userId) {
+        postMapper.deleteByUserId(userId);
+        userMapper.deleteById(userId);
     }
 
     /**
@@ -80,7 +78,7 @@ public class UserService {
      * @return 用户
      */
     public User getUserByUsername(String username) {
-        final User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUsername, username));
+        final User user = userMapper.selectByUsername(username);
         if (user == null) {
             throw new UserNotFoundException(username);
         }
@@ -88,7 +86,7 @@ public class UserService {
     }
 
     public List<User> getUsers() {
-        return userMapper.selectList(null);
+        return userMapper.selectList();
     }
 
 }

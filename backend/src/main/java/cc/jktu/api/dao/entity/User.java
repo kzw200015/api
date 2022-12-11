@@ -1,19 +1,12 @@
 package cc.jktu.api.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Data
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-@TableName("users")
-public class User extends BaseEntity {
+public class User {
 
+    private Integer id;
     private String username;
-    @JsonIgnore
     private String password;
 
 }
