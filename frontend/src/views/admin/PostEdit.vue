@@ -1,5 +1,5 @@
 <template>
-  <markdown-editor v-model:content="post.content" :content="post.content"></markdown-editor>
+  <markdown-editor v-model:content="post.content"></markdown-editor>
   <el-button>保存</el-button>
 </template>
 
