@@ -5,11 +5,13 @@ const router = createRouter({
     routes: [
         {
             path: "/login",
+            name: "login",
             component: () => import("../views/UserLogin.vue"),
             props: true
         },
         {
             path: "/register",
+            name: "register",
             component: () => import("../views/UserRegister.vue")
         },
         {
@@ -19,11 +21,13 @@ const router = createRouter({
             children: [
                 {
                     path: "posts",
+                    name: "postList",
                     component: () => import("../views/admin/PostList.vue"),
                     meta: { title: "文章列表" }
                 },
                 {
-                    path: "posts/:id/edit",
+                    path: "posts/:postId/edit",
+                    name: "postEdit",
                     component: () => import("../views/admin/PostEdit.vue"),
                     meta: { title: "文章编辑" },
                     props: true
@@ -32,6 +36,5 @@ const router = createRouter({
         }
     ]
 })
-
 
 export { router }

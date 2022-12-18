@@ -42,7 +42,7 @@ public class PostService {
         final Integer total = postMapper.count();
         final Page<Post> page = new Page<>();
         page.setTotal(total);
-        page.setPages(total / pageSize + 1);
+        page.setPages((int) Math.ceil(((double) total) / pageSize));
         page.setPageNum(pageNum);
         page.setPageSize(pageSize);
         page.setValues(posts);

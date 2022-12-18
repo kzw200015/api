@@ -36,18 +36,31 @@
         FROM post p
         WHERE p.id = #{id}
     </delete>
-    <select id="selectPage" resultType="cc.jktu.api.dao.entity.Post">
-        SELECT *
+    <select id="selectPage" resultMap="postResultMap">
+        <bind name="offset" value="(pageNum-1) * pageSize"/>
+        SELECT p.id,
+        title,
+        content,
+        create_time,
+        update_time,
+        user_id,
+        u.username
         FROM post p
-        LIMIT #{pageNum},#{pageSize}
+        LEFT JOIN user u ON u.id = p.user_id
+        LIMIT #{offset}, #{pageSize}
     </select>
     <select id="count" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM post p
     </select>
-    <select id="selectById" resultType="cc.jktu.api.dao.entity.Post">
+    <select id="selectById" resultMap="postResultMap">
         SELECT *
         FROM post p
         WHERE p.id = #{id}
     </select>
+    <resultMap id="postResultMap" type="cc.jktu.api.dao.entity.Post">
+        <association property="user" javaType="cc.jktu.api.dao.entity.User">
+            <id property="id" column="user_id"/>
+        </association>
+    </resultMap>
 </mapper>

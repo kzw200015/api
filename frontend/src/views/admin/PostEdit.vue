@@ -1,20 +1,28 @@
 <template>
-  <div>post edit</div>
+  <markdown-editor v-model:content="post.content" :content="post.content"></markdown-editor>
+  <el-button>保存</el-button>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue"
+import { onMounted, ref, watch } from "vue"
 import { getPostById, Post } from "../../api"
+import "vditor/dist/index.css"
+import MarkdownEditor from "../../components/MarkdownEditor.vue"
 
 const props = defineProps<{
-  postId: number
+  postId: string
 }>()
-
-const post = ref<Post>()
-
+const post = ref<Post>({ content: "", createTime: 0, id: 0, title: "", updateTime: 0, userId: 0 })
 onMounted(async () => {
-  await getPostById(props.postId)
+  post.value = await getPostById(Number.parseInt(props.postId))
 })
+
+watch(() => post.value.content, () => console.log(post.value))
+
+
+// const handleSave = async () => {
+//
+// }
 </script>
 <style scoped>
 

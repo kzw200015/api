@@ -9,8 +9,7 @@ const client = axios.create({
 
 client.interceptors.response.use((response: AxiosResponse) => response, async (error: AxiosError) => {
     if (error.response?.status === 401) {
-        await router.push("/login")
-        ElMessage.info("请登录")
+        await router.push({ name: "login" })
     } else if (error.response?.status === 403) {
         ElMessage.warning("无权进行此操作")
     }
@@ -49,19 +48,17 @@ export const logout = async () => {
     await client.post("/auth/logout")
 }
 
-export const getPosts = async (page: number, size: number): Promise<Page<Post>> => {
+export const getPosts = async (pageNum: number, pageSize: number): Promise<Page<Post>> => {
     const resp = await client.get<Resp<Page<Post>>>("/posts", {
         params: {
-            page: page,
-            size: size
+            pageNum: pageNum,
+            pageSize: pageSize
         }
     })
-
     return resp.data.data
 }
 
 export const getPostById = async (id: number): Promise<Post> => {
     const resp = await client.get<Resp<Post>>(`/posts/${id}`)
-
     return resp.data.data
 }

@@ -19,13 +19,14 @@ export interface Post {
     createTime: number
     updateTime: number
     userId: number
+    user?: User
 }
 
 export interface Page<T> {
     total: number
     pages: number
-    size: number
-    current: number
+    pageSize: number
+    pageNum: number
     values: T[]
 }
 

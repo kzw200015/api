@@ -21,8 +21,8 @@ public class PostController {
     }
 
     @GetMapping("")
-    public Page<Post> getPosts(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
-        return postService.getPosts(page, size);
+    public Page<Post> getPosts(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
+        return postService.getPosts(pageNum, pageSize);
     }
 
     @PostMapping("")

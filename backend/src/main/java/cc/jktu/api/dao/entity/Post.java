@@ -11,5 +11,6 @@ public class Post {
     private Long createTime;
     private Long updateTime;
     private Integer userId;
+    private User user;
 
 }

@@ -1,6 +1,6 @@
 <template>
   <el-menu
-      :default-active="route.path"
+      :default-active="activeIndex"
       mode="horizontal"
       :ellipsis="false"
   >
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router"
-import { onMounted, reactive, ref } from "vue"
+import { computed, onMounted, reactive, ref } from "vue"
 import { getMe, logout, User } from "../../api"
 
 const route = useRoute()
@@ -28,6 +28,10 @@ const navItems = reactive([
   {
     name: "文章管理",
     path: "/admin/posts"
+  },
+  {
+    name: "系统管理",
+    path: "/admin/system"
   }
 ])
 
@@ -39,10 +43,13 @@ onMounted(async () => {
 
 
 const handleLogout = async () => {
-
   await logout()
   await getMe()
 }
+
+const activeIndex = computed(() => {
+  return navItems.find(it => route.path.startsWith(it.path))?.path
+})
 </script>
 <style scoped>
 

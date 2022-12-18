@@ -22,7 +22,9 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
         if (body instanceof CommonResponse<?>) {
             return body;
         } else {
-            return new CommonResponse<Void>();
+            final CommonResponse<Object> resp = new CommonResponse<>();
+            resp.setData(body);
+            return resp;
         }
     }
 

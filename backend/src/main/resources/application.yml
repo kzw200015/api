@@ -1,9 +1,9 @@
 spring:
   sql:
     init:
-      schema-locations: classpath:/blog/schema.sql
+      schema-locations: classpath:/db/schema.sql
       mode: always
-      data-locations: classpath:/blog/data.sql
+      data-locations: classpath:/db/data.sql
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
@@ -16,6 +16,9 @@ spring:
 
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
 
 logging:
   level:
