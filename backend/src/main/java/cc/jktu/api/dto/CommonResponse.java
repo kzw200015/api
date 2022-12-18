@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CommonResponse<T> {
 
-    private String msg = "success";
+    private String msg = "操作成功";
     private T data;
 
     public static CommonResponse<Void> noContent(String msg) {

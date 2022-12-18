@@ -1,6 +1,8 @@
-package cc.jktu.api.exception;
+package cc.jktu.api.exception.notFound;
 
-public class IpNotFoundException extends RuntimeException {
+import cc.jktu.api.exception.NotFoundException;
+
+public class IpNotFoundException extends NotFoundException {
 
     private final String ip;
 

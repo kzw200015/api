@@ -1,7 +1,7 @@
 <template>
   <div class="post-list-container">
-    <el-table height="100%" :data="posts">
-      <el-table-column prop="title" label="标题"/>
+    <el-table :data="posts" height="100%">
+      <el-table-column label="标题" prop="title"/>
       <el-table-column label="创建时间">
         <template #default="scope">
           {{ formatDateTime(scope.row.createTime) }}
@@ -24,11 +24,11 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination background class="pager" v-model:current-page="page" layout="prev,pager,next" :total="total"/>
+    <el-pagination v-model:current-page="page" :total="total" background class="pager" layout="prev,pager,next"/>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { getPosts, Post } from "../../api"
 import { onMounted, ref, watch } from "vue"
 import { formatDateTime } from "../../utils"

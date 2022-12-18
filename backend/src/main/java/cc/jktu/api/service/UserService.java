@@ -3,9 +3,11 @@ package cc.jktu.api.service;
 import cc.jktu.api.dao.entity.User;
 import cc.jktu.api.dao.mapper.PostMapper;
 import cc.jktu.api.dao.mapper.UserMapper;
-import cc.jktu.api.exception.UserNotFoundException;
+import cc.jktu.api.exception.DuplicatedUsernameException;
+import cc.jktu.api.exception.notFound.UserNotFoundException;
 import cc.jktu.api.util.BcryptUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,13 +27,13 @@ public class UserService {
      * @param user 用户对象
      */
     public void addUser(User user) {
-        if (userMapper.count() > 1) {
-            return;
-        }
-
         user.setId(null);
         user.setPassword(BcryptUtil.hashPassword(user.getPassword()));
-        userMapper.insert(user);
+        try {
+            userMapper.insert(user);
+        } catch (DuplicateKeyException e) {
+            throw new DuplicatedUsernameException(user.getUsername());
+        }
     }
 
     /**

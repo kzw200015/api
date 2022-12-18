@@ -22,4 +22,5 @@ public interface UserMapper {
     Integer count();
 
     void insert(@Param("user") User user);
+
 }

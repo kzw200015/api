@@ -3,7 +3,7 @@ package cc.jktu.api.service;
 import cc.jktu.api.dao.entity.Post;
 import cc.jktu.api.dao.mapper.PostMapper;
 import cc.jktu.api.dto.Page;
-import cc.jktu.api.exception.PostNotFoundException;
+import cc.jktu.api.exception.notFound.PostNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

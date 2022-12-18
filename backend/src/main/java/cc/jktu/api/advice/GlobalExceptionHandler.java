@@ -1,9 +1,9 @@
 package cc.jktu.api.advice;
 
 import cc.jktu.api.dto.CommonResponse;
+import cc.jktu.api.exception.AppException;
 import cc.jktu.api.exception.NotFoundException;
 import cc.jktu.api.exception.UnauthorizedException;
-import cc.jktu.api.exception.WrongPasswordException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,36 +15,34 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @Slf4j
 public class GlobalExceptionHandler {
 
-
-    @ExceptionHandler(WrongPasswordException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public CommonResponse<?> handleWrongWrongPasswordException(WrongPasswordException ex) {
-        return CommonResponse.noContent(ex.getLocalizedMessage());
-    }
-
     @ExceptionHandler(UnauthorizedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public CommonResponse<?> handleUnauthorizedException(UnauthorizedException ex) {
-        return CommonResponse.noContent(ex.getLocalizedMessage());
+    public CommonResponse<?> handle(UnauthorizedException e) {
+        return CommonResponse.noContent(e.getLocalizedMessage());
     }
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public CommonResponse<?> handleNotFoundException(NotFoundException ex) {
-        return CommonResponse.noContent(ex.getLocalizedMessage());
+    public CommonResponse<?> handle(NotFoundException e) {
+        return CommonResponse.noContent(e.getLocalizedMessage());
+    }
+
+    @ExceptionHandler(AppException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public CommonResponse<?> handle(AppException e) {
+        return CommonResponse.noContent(e.getLocalizedMessage());
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public CommonResponse<?> handleNoHandlerFoundException(NoHandlerFoundException ex) {
-        return CommonResponse.noContent(ex.getLocalizedMessage());
+    public CommonResponse<?> handle(NoHandlerFoundException e) {
+        return CommonResponse.noContent(e.getLocalizedMessage());
     }
 
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public CommonResponse<?> handleThrowable(Throwable ex) {
-        log.error(ex.getLocalizedMessage());
-        ex.printStackTrace();
+    public CommonResponse<?> handle(Throwable e) {
+        e.printStackTrace();
         return CommonResponse.noContent(HttpStatus.INTERNAL_SERVER_ERROR.name());
     }
 

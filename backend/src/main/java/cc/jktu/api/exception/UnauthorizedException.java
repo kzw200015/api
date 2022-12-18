@@ -1,5 +1,9 @@
 package cc.jktu.api.exception;
 
-public class UnauthorizedException extends RuntimeException {
+public class UnauthorizedException extends AppException {
+
+    public UnauthorizedException() {
+        super("未认证");
+    }
 
 }

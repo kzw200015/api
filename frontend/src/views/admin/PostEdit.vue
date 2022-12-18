@@ -3,7 +3,7 @@
   <el-button>保存</el-button>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { onMounted, ref, watch } from "vue"
 import { getPostById, Post } from "../../api"
 import "vditor/dist/index.css"

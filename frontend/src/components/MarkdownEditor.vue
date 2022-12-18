@@ -2,7 +2,7 @@
   <div id="editor"></div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { onMounted, ref, watch } from "vue"
 import Vditor from "vditor"
 

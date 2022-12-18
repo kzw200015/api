@@ -1,6 +1,6 @@
 package cc.jktu.api.exception;
 
-public class WrongPasswordException extends RuntimeException {
+public class WrongPasswordException extends AppException {
 
     @Override
     public String getMessage() {

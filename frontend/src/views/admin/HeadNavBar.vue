@@ -1,12 +1,12 @@
 <template>
   <el-menu
       :default-active="activeIndex"
-      mode="horizontal"
       :ellipsis="false"
+      mode="horizontal"
   >
-    <el-menu-item @click="router.push('/')" index="/">{{ "Kong's Blog" }}</el-menu-item>
+    <el-menu-item index="/" @click="router.push('/')">{{ "Kong's Blog" }}</el-menu-item>
     <div style="flex-grow: 1"/>
-    <el-menu-item @click="router.push(item.path)" v-for="item in navItems" :index="item.path" :key="item.path">
+    <el-menu-item v-for="item in navItems" :key="item.path" :index="item.path" @click="router.push(item.path)">
       {{ item.name }}
     </el-menu-item>
     <div style="flex-grow: 1"/>
@@ -17,7 +17,7 @@
   </el-menu>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRoute, useRouter } from "vue-router"
 import { computed, onMounted, reactive, ref } from "vue"
 import { getMe, logout, User } from "../../api"

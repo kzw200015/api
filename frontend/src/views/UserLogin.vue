@@ -1,14 +1,14 @@
 <template>
   <el-container>
     <el-main>
-      <el-row class="login-form-container" justify="center" align="middle">
+      <el-row align="middle" class="login-form-container" justify="center">
         <el-col :md="12">
           <el-form :model="loginForm" label-width="150px">
             <el-form-item label="用户名">
               <el-input v-model="loginForm.username"/>
             </el-form-item>
             <el-form-item label="密码" label-width="150px">
-              <el-input show-password clearable v-model="loginForm.password"/>
+              <el-input v-model="loginForm.password" clearable show-password/>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="handleLoginClick">登录</el-button>
@@ -20,7 +20,7 @@
   </el-container>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { onMounted, reactive } from "vue"
 import { login, UserRegisterOrLoginRequest } from "../api"
 import { useRouter } from "vue-router"
