@@ -4,7 +4,7 @@ import cc.jktu.api.dao.entity.User;
 import cc.jktu.api.dao.mapper.PostMapper;
 import cc.jktu.api.dao.mapper.UserMapper;
 import cc.jktu.api.exception.DuplicatedUsernameException;
-import cc.jktu.api.exception.notFound.UserNotFoundException;
+import cc.jktu.api.exception.UserNotFoundException;
 import cc.jktu.api.util.BcryptUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;

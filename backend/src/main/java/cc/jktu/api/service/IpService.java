@@ -1,7 +1,7 @@
 package cc.jktu.api.service;
 
 import cc.jktu.api.dto.IpInfo;
-import cc.jktu.api.exception.notFound.IpNotFoundException;
+import cc.jktu.api.exception.IpNotFoundException;
 import com.github.jarod.qqwry.IPZone;
 import com.github.jarod.qqwry.QQWry;
 import com.maxmind.geoip2.DatabaseReader;

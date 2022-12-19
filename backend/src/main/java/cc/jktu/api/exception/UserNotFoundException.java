@@ -1,6 +1,5 @@
-package cc.jktu.api.exception.notFound;
+package cc.jktu.api.exception;
 
-import cc.jktu.api.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

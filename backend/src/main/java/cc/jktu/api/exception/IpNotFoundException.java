@@ -1,6 +1,4 @@
-package cc.jktu.api.exception.notFound;
-
-import cc.jktu.api.exception.NotFoundException;
+package cc.jktu.api.exception;
 
 public class IpNotFoundException extends NotFoundException {
 
