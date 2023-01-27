@@ -1,6 +1,6 @@
 package cc.jktu.api.controller;
 
-import cc.jktu.api.annotation.NeedLogin;
+import cc.jktu.api.annotation.NeedAuth;
 import cc.jktu.api.dao.entity.User;
 import cc.jktu.api.dto.UserAddOrUpdateRequest;
 import cc.jktu.api.service.UserService;
@@ -17,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/me")
-    @NeedLogin
+    @NeedAuth
     public User me(@SessionAttribute("userId") Integer userId) {
         return userService.getUserById(userId);
     }
@@ -28,13 +28,13 @@ public class UserController {
     }
 
     @GetMapping("")
-    @NeedLogin
+    @NeedAuth
     public List<User> getUsers() {
         return userService.getUsers();
     }
 
     @PostMapping("")
-    @NeedLogin
+    @NeedAuth
     public void addUser(@RequestBody UserAddOrUpdateRequest request) {
         final User user = new User();
         user.setUsername(request.getUsername());
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    @NeedLogin
+    @NeedAuth
     public void updateUserById(@PathVariable("id") Integer id, @RequestBody UserAddOrUpdateRequest request) {
         final User user = new User();
         user.setId(id);
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @NeedLogin
+    @NeedAuth
     public void removeUserById(@PathVariable("id") Integer id) {
         userService.removeUserById(id);
     }

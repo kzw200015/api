@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.net.Inet4Address;
 import java.net.InetAddress;
 
 @Service
@@ -26,7 +27,7 @@ public class IpService {
         final String ipHeader = request.getHeader("X-Forwarded-For");
         if (ipHeader != null) {
             final String[] proxyIps = ipHeader.split(",");
-            if (proxyIps.length >= 1) {
+            if (proxyIps.length > 0) {
                 ip = proxyIps[0];
             }
         }
@@ -38,12 +39,15 @@ public class IpService {
     public IpInfo getIpInfo(String ip) {
         final IpInfo ipInfo = new IpInfo();
         try {
-            final IPZone ipZone = qqWry.findIP(ip);
-            final AsnResponse asn = maxmind.asn(InetAddress.getByName(ip));
+            final InetAddress inetAddress = InetAddress.getByName(ip);
             ipInfo.setIp(ip);
-            ipInfo.setLoc(ipZone.getMainInfo());
+            final AsnResponse asn = maxmind.asn(inetAddress);
             ipInfo.setOrg(asn.getAutonomousSystemOrganization());
             ipInfo.setAsn("AS" + asn.getAutonomousSystemNumber());
+            if (inetAddress instanceof Inet4Address) {
+                final IPZone ipZone = qqWry.findIP(ip);
+                ipInfo.setLoc(ipZone.getMainInfo());
+            }
         } catch (AddressNotFoundException e) {
             throw new IpNotFoundException(ip);
         }

@@ -1,6 +1,6 @@
 package cc.jktu.api.controller;
 
-import cc.jktu.api.annotation.NeedLogin;
+import cc.jktu.api.annotation.NeedAuth;
 import cc.jktu.api.dao.entity.Post;
 import cc.jktu.api.dto.Page;
 import cc.jktu.api.dto.PostAddOrUpdateRequest;
@@ -26,7 +26,7 @@ public class PostController {
     }
 
     @PostMapping("")
-    @NeedLogin
+    @NeedAuth
     public void addPost(@RequestBody PostAddOrUpdateRequest request) {
         final Post post = new Post();
         post.setTitle(request.getTitle());
@@ -38,7 +38,7 @@ public class PostController {
     }
 
     @PatchMapping("/{id}")
-    @NeedLogin
+    @NeedAuth
     public void updatePostById(@PathVariable("id") Integer id, @RequestBody PostAddOrUpdateRequest request) {
         final Post post = new Post();
         post.setId(id);
@@ -51,7 +51,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    @NeedLogin
+    @NeedAuth
     public void removePostById(@PathVariable("id") Integer id) {
         postService.removePostById(id);
     }

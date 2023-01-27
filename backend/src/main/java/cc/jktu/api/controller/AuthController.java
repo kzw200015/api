@@ -1,6 +1,6 @@
 package cc.jktu.api.controller;
 
-import cc.jktu.api.annotation.NeedLogin;
+import cc.jktu.api.annotation.NeedAuth;
 import cc.jktu.api.dao.entity.User;
 import cc.jktu.api.dto.UserRegisterOrLoginRequest;
 import cc.jktu.api.exception.WrongPasswordException;
@@ -39,7 +39,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    @NeedLogin
+    @NeedAuth
     public void logout(HttpSession session) {
         session.invalidate();
     }

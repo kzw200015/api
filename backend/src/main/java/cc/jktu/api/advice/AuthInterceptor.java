@@ -1,6 +1,6 @@
 package cc.jktu.api.advice;
 
-import cc.jktu.api.annotation.NeedLogin;
+import cc.jktu.api.annotation.NeedAuth;
 import cc.jktu.api.exception.UnauthorizedException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,13 +14,13 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (handler instanceof HandlerMethod handlerMethod) {
-            NeedLogin needLogin = handlerMethod.getMethodAnnotation(NeedLogin.class);
+            NeedAuth needAuth = handlerMethod.getMethodAnnotation(NeedAuth.class);
 
-            if (needLogin == null) {
-                needLogin = handlerMethod.getMethod().getDeclaringClass().getAnnotation(NeedLogin.class);
+            if (needAuth == null) {
+                needAuth = handlerMethod.getMethod().getDeclaringClass().getAnnotation(NeedAuth.class);
             }
 
-            if (needLogin != null) {
+            if (needAuth != null) {
                 final HttpSession session = request.getSession(false);
                 if (session == null || session.getAttribute("userId") == null) {
                     throw new UnauthorizedException();
